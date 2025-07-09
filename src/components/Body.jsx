@@ -31,7 +31,7 @@ const Body = () => {
     fetchUser();
   }, []);
   return (
-    <div>
+    <div className="min-h-screen pb-20">
       <NavBar />
       <Outlet />
       <Footer />
