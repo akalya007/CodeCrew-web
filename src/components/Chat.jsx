@@ -10,7 +10,7 @@ const Chat = () => {
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
   const user = useSelector((store) => store.user);
-  const userId = user?._id;
+  const userId = user?._id;  //React renders it in multiple cycles.on the initial rendering , user will be nulll--so use oprional chaining.
 
   const fetchChatMessages = async () => {
     const chat = await axios.get(BASE_URL + "/chat/" + targetUserId, {
@@ -36,10 +36,10 @@ const Chat = () => {
   }, []);
 
   useEffect(() => {
-    if (!userId) {
+    if (!userId) {  //dont create teh socket connection , when the user id is not present.
       return;
     }
-    const socket = createSocketConnection(); 
+    const socket = createSocketConnection();   //creating the socket Connetion.
     // As soon as the page loaded, the socket connection is made and joinChat event is emitted
     socket.emit("joinChat", {    //as soon as we emitted the event , the backend will receive the emit event.
       firstName: user.firstName,
@@ -52,14 +52,14 @@ const Chat = () => {
       setMessages((messages) => [...messages, { firstName, lastName, text }]);
     });
 
-    return () => {      //whatever the function in the return ,it will called , when the component unmount. or unloads.
-      socket.disconnect();//make sure , when we create the socket , we should unloads.also disconnect the socket
+    return () => {      //whatever the function in the return ,it will called , when the component unmount. or unloads.---{  VERY IMPORTANT THING.}
+      socket.disconnect();//make sure , when we create the socket , we should unloads.also disconnect the socket--we shouls clean up the event.
     };
   }, [userId, targetUserId]);
 
   const sendMessage = () => {
-    const socket = createSocketConnection();
-    socket.emit("sendMessage", {
+    const socket = createSocketConnection();   //socket connection is made inside the useEffect so cannot use outside the useEffect() , so here create the connection.
+    socket.emit("sendMessage", {      //in this we were ending who is sending the message , to whom the message id sending , what they were sending.
       firstName: user.firstName,
       lastName: user.lastName,
       userId,
@@ -106,3 +106,4 @@ const Chat = () => {
   );
 };
 export default Chat;
+

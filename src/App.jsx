@@ -21,8 +21,10 @@ function App() {
               <Route path="/profile" element={<Profile />} />
                <Route path="/connections" element={<Connections />} />
                 <Route path="/requests" element={<Requests />} />
-                <Route path="/chat/:targetUserId" element={<Chat />} />
-
+                <Route path="/chat/:targetUserId" element={<Chat />}
+                //targetuserid is the person whom you want tp
+                />  
+               
             </Route>
           </Routes>
         </BrowserRouter>
