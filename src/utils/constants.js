@@ -1,5 +1,7 @@
 // export const BASE_URL =  "http://localhost:3000";
-export const BASE_URL =  "/api";
+// export const BASE_URL =  "/api";
+
+export const BASE_URL =  "https://codecrew-wp09.onrender.com";
 
 
 // export const BASE_URL =  "http://localhost:3000";
