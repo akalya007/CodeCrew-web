@@ -5,7 +5,7 @@ const requestSlice = createSlice({
   initialState: null,
   reducers: {
     addRequests: (state, action) => action.payload,
-    removeRequest: (state, action) => {
+    removeRequest: (state, action) => {      //if the buttom is accespted or rejected , we need to remove the request from it.
       const newArray = state.filter((r) => r._id !== action.payload);
       return newArray;
     },

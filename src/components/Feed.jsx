@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addFeed } from "../utils/feedSlice";
 import { useEffect } from "react";
 import UserCard from "./UserCard";
-
+                                //we will get the feed , ans add the feed in the store.
 const Feed = () => {
   
   const feed = useSelector((store) => store.feed);  //to read the feed.

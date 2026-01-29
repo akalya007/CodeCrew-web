@@ -14,16 +14,16 @@ const [emailId, setEmailId] = useState("");
   const [error, setError] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
-  const handleLogin = async () => {
+  
+  //useing the same form both the sign up and the login,using the toggle kind of thing to change between the login and the signup.
+  const handleLogin = async () => {//this is the function , that actually makes to the apu cxall to the login.
     try {
-      const res = await axios.post(
-        BASE_URL + "/login",
+      const res = await axios.post(BASE_URL + "/login",
         {
           emailId,
           password,
         },
-        { withCredentials: true }   //when we dont add this credential , it will dont ent the token back in the api.
+        { withCredentials: true }   //when we dont add this credential , it will dont return the token back in the api.
       );
       dispatch(addUser(res.data));
       return navigate("/");
@@ -54,16 +54,13 @@ const [emailId, setEmailId] = useState("");
             {isLoginForm ? "Login" : "Sign Up"}
           </h2>
           <div>
-{!isLoginForm && (
+{!isLoginForm && (   //if the form is login , it will not show the login and the signup.
               <>
                 <label className="form-control w-full max-w-xs my-2">
                   <div className="label">
                     <span className="label-text">First Name</span>
                   </div>
-                  <input
-                    type="text"
-                    value={firstName}
-                    className="input input-bordered w-full max-w-xs"
+                  <input type="text" value={firstName} className="input input-bordered w-full max-w-xs"
                     onChange={(e) => setFirstName(e.target.value)}
                   />
                 </label>
@@ -89,7 +86,7 @@ const [emailId, setEmailId] = useState("");
                 type="text"
                 value={emailId}
                 className="input input-bordered w-full max-w-xs"
-                onChange={(e) => setEmailId(e.target.value)}
+                onChange={(e) => setEmailId(e.target.value)}  //as soon as the value of the input box changes , we were changing the state variable also.
               />
             </label>
             <label className="form-control w-full max-w-xs my-2">
@@ -127,3 +124,8 @@ const [emailId, setEmailId] = useState("");
   );
 };
 export default Login;
+
+
+/**
+ * what happens when no value , is given inside the usestate()-==It gives the error---A component is changing an uncontrolled input to be controlled.---initialize with some value or empty value.
+ */

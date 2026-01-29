@@ -18,7 +18,7 @@ const [age, setAge] = useState(user.age || "");
 
   const saveProfile = async () => {
     //Clear Errors
-    setError("");
+    setError("");   //BEFORE SAVING THE profile , i will clear the error.
     try {
       const res = await axios.patch(
         BASE_URL + "/profile/edit",
@@ -33,7 +33,9 @@ const [age, setAge] = useState(user.age || "");
         { withCredentials: true }
       );
       dispatch(addUser(res?.data?.data));
+     
       setShowToast(true);
+      
       setTimeout(() => {
         setShowToast(false);
       }, 3000);

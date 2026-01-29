@@ -48,3 +48,18 @@ const UserCard = ({ user }) => {
   );
 };
 export default UserCard;
+
+
+
+/**
+ * 🧩 1. Separation of Concerns (Component Reusability)
+Feed ===> it fetches the list of users from “feed” ap" backend ans store in the redux. and managing state (Redux, API call, etc.).
+UserCard ===> handles displaying a single user’s info and actions related to that user (like Ignore / Interested).
+
+By separating these:
+======================
+Feed doesn’t need to care how a user is visually represented.
+UserCard can be reused elsewhere (e.g. in search results, matches list, profile preview).
+
+So this improves reusability and maintainability.
+ */

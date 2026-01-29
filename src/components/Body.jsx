@@ -10,9 +10,9 @@ import { useEffect } from "react";
 const Body = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const userData = useSelector((store) => store.user);
+  const userData = useSelector((store) => store.user);   //we subscribing to the store because , it is making the pi vall can profile view , on every time it renders the compound. 
 
-  const fetchUser = async () => {
+  const fetchUser = async () => {     //when the page loads , it should not logout.so making the api call of the login user via profile/view.
     if (userData) return;
     try {
       const res = await axios.get(BASE_URL + "/profile/view", {
@@ -21,15 +21,16 @@ const Body = () => {
       dispatch(addUser(res.data));
     } catch (err) {
       
-        navigate("/login");
+        navigate("/login");    //if the user is not present , then navigate to the login page.
       
       console.error(err);
     }
   };
 
-  useEffect(() => {  //fetch the user , when the Component is loaded.
+  useEffect(() => {  //fetch the user(loged in) , when the Component is loaded.
     fetchUser();
   }, []);
+
   return (
     <div className="min-h-screen pb-20">
       <NavBar />
@@ -39,3 +40,16 @@ const Body = () => {
   );
 };
 export default Body;
+//here outlet says that , any childer routes  of Body, will render.
+
+
+/**
+ * 💡 In simple terms:
+
+withCredentials: true → ✅ sends cookies / session tokens stored in the browser to the server.
+
+Without it → 🚫 cookies are not sent → your backend can’t identify who you are (it thinks you’re logged out).
+
+
+WITHOUT IT===Cookies/session not sent → “unauthorized” errors
+ */

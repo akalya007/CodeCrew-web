@@ -5,7 +5,7 @@ import { BASE_URL } from "../utils/constants";
 import { removeUser } from "../utils/userSlice";
 
 const NavBar = () => {
-  const user = useSelector((store) => store.user);
+  const user = useSelector((store) => store.user);   //subscribe to the store.
  // console.log(user);
 const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -13,7 +13,7 @@ const dispatch = useDispatch();
   const handleLogout = async () => {
     try {
       await axios.post(BASE_URL + "/logout", {}, { withCredentials: true });
-      dispatch(removeUser());
+      dispatch(removeUser());   //when we logout , we clear the redux store, and navigate to the login page.
       return navigate("/login");
     } catch (err) {
     console.error("Logout failed. Proceeding with local logout anyway." , err);
